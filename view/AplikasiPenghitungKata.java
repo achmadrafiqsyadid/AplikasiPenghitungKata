@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Tugas5.view;
+
+import Tugas5.helper.PenghitungKataHelper;
+import javax.swing.JOptionPane;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -16,8 +17,8 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
      * Creates new form AplikasiPenghitungKata
      */
     public AplikasiPenghitungKata() {
-        initComponents();
-    }
+    initComponents();
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,18 +30,18 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelKata = new javax.swing.JLabel();
+        jLabelKarakter = new javax.swing.JLabel();
+        jLabelKalimat = new javax.swing.JLabel();
+        jLabelParagraf = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonHitung = new javax.swing.JButton();
+        jButtonSimpan = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelCari = new javax.swing.JLabel();
+        jButtonCari = new javax.swing.JButton();
+        jTampilan = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Penghitung Kata");
@@ -50,17 +51,17 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hasil Perhitungan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14))); // NOI18N
         jPanel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel2.setText("Jumlah Kata :");
+        jLabelKata.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabelKata.setText("Jumlah Kata :");
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel3.setText("Jumlah Karakter :");
+        jLabelKarakter.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabelKarakter.setText("Jumlah Karakter :");
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setText("Jumlah Kalimat :");
+        jLabelKalimat.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabelKalimat.setText("Jumlah Kalimat :");
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setText("Jumlah Paragraf :");
+        jLabelParagraf.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabelParagraf.setText("Jumlah Paragraf :");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -69,23 +70,23 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabelParagraf)
+                    .addComponent(jLabelKalimat)
+                    .addComponent(jLabelKarakter)
+                    .addComponent(jLabelKata))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jLabelKata)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(jLabelKarakter)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(jLabelKalimat)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(jLabelParagraf)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -94,25 +95,40 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton1.setBackground(new java.awt.Color(255, 204, 0));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton1.setText("Hitung");
+        jButtonHitung.setBackground(new java.awt.Color(255, 204, 0));
+        jButtonHitung.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jButtonHitung.setText("Hitung");
+        jButtonHitung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHitungActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(255, 204, 0));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setText("Simpan");
+        jButtonSimpan.setBackground(new java.awt.Color(255, 204, 0));
+        jButtonSimpan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jButtonSimpan.setText("Simpan");
+        jButtonSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSimpanActionPerformed(evt);
+            }
+        });
 
         jTextField1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel1.setText("Cari");
+        jLabelCari.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabelCari.setText("Cari");
 
-        jButton3.setBackground(new java.awt.Color(255, 204, 0));
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton3.setText("Cari");
+        jButtonCari.setBackground(new java.awt.Color(255, 204, 0));
+        jButtonCari.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jButtonCari.setText("Cari");
+        jButtonCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCariActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel6.setText("Aplikasi Penghitung Kata");
+        jTampilan.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jTampilan.setText("Aplikasi Penghitung Kata");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,15 +136,15 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(86, 86, 86)
-                .addComponent(jButton1)
+                .addComponent(jButtonHitung)
                 .addGap(36, 36, 36)
-                .addComponent(jButton2)
+                .addComponent(jButtonSimpan)
                 .addGap(39, 39, 39)
-                .addComponent(jLabel1)
+                .addComponent(jLabelCari)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(jButtonCari)
                 .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -139,24 +155,24 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE))
                         .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addComponent(jTampilan)
                         .addGap(206, 206, 206))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel6)
+                .addComponent(jTampilan)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonHitung, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
+                        .addComponent(jButtonSimpan)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(jButton3)))
+                        .addComponent(jLabelCari)
+                        .addComponent(jButtonCari)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -164,6 +180,53 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHitungActionPerformed
+  String teks = jTextArea1.getText();
+
+        int jumlahKata = PenghitungKataHelper.hitungKata(teks);
+        int jumlahKarakter = PenghitungKataHelper.hitungKarakter(teks);
+        int jumlahKalimat = PenghitungKataHelper.hitungKalimat(teks);
+        int jumlahParagraf = PenghitungKataHelper.hitungParagraf(teks);
+
+        jLabelKata.setText("Jumlah Kata : " + jumlahKata);
+        jLabelKarakter.setText("Jumlah Karakter : " + jumlahKarakter);
+        jLabelKalimat.setText("Jumlah Kalimat : " + jumlahKalimat);
+        jLabelParagraf.setText("Jumlah Paragraf : " + jumlahParagraf);
+    }//GEN-LAST:event_jButtonHitungActionPerformed
+
+    private void jButtonCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCariActionPerformed
+String teks = jTextArea1.getText();
+        String kataDicari = jTextField1.getText();
+
+        if (kataDicari.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Masukkan kata yang ingin dicari!");
+            return;
+        }
+
+        int jumlah = PenghitungKataHelper.cariKata(teks, kataDicari);
+        JOptionPane.showMessageDialog(this, 
+                "Kata \"" + kataDicari + "\" ditemukan sebanyak " + jumlah + " kali dalam teks.");
+    }//GEN-LAST:event_jButtonCariActionPerformed
+
+    private void jButtonSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimpanActionPerformed
+ try {
+            FileWriter writer = new FileWriter("hasil_penghitungan.txt");
+            writer.write("=== HASIL PENGHITUNGAN TEKS ===\n\n");
+            writer.write("Teks Asli:\n" + jTextArea1.getText() + "\n\n");
+            writer.write(jLabelKata.getText() + "\n");
+            writer.write(jLabelKarakter.getText() + "\n");
+            writer.write(jLabelKalimat.getText() + "\n");
+            writer.write(jLabelParagraf.getText() + "\n");
+            writer.close();
+
+            JOptionPane.showMessageDialog(this, 
+                "Hasil berhasil disimpan ke file: hasil_penghitungan.txt");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Terjadi kesalahan saat menyimpan file: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonSimpanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,17 +254,17 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton jButtonCari;
+    private javax.swing.JButton jButtonHitung;
+    private javax.swing.JButton jButtonSimpan;
+    private javax.swing.JLabel jLabelCari;
+    private javax.swing.JLabel jLabelKalimat;
+    private javax.swing.JLabel jLabelKarakter;
+    private javax.swing.JLabel jLabelKata;
+    private javax.swing.JLabel jLabelParagraf;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jTampilan;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
